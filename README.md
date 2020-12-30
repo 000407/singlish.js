@@ -1,0 +1,1 @@
+## `singlish.js` - Sinhala Transliteration Parser

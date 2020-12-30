@@ -1,0 +1,35 @@
+{
+  "name": "singlish.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/singlish.js",
+  "scripts": {
+    "start": "concurrently -k \"npm run dev\" \"npm run watch-css\"",
+    "dev": "lite-server",
+    "db": "json-server --watch db.json --port 3005",
+    "build": "webpack --config=webpack.config.js --mode=production",
+    "build-min": "webpack --env minify=true --config=webpack.config.js --mode=production",
+    "lint": "eslint ./src/**/*.js",
+    "build-css": "node-sass --include-path scss scss/main.scss assets/main.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
+    "test": "mocha test",
+    "pretest": "npm run lint",
+    "posttest": "echo the test has been run!",
+    "bash": "Location of the bash/shell script file"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.2.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-minify": "^0.5.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.6.0",
+    "webpack-cli": "^4.2.0"
+  }
+}

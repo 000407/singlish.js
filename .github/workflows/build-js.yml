@@ -1,0 +1,32 @@
+name: Build transpose.js
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm run build --if-present
+    - run: npm run build-min --if-present
+      env:
+        CI: true
+    - name: Commit build output
+      uses: EndBug/add-and-commit@v5
+      with:
+        author_name: 000407-actions-bot
+        author_email: kanchana@senadheera.net
+        message: "Commit: Build Output"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

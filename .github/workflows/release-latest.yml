@@ -1,0 +1,14 @@
+name: Release Command
+on:
+  repository_dispatch:
+    types: [release-command]
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: echo "READY"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
