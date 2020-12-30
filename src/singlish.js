@@ -109,7 +109,6 @@ export default class Singlish {
 							+ (rakaransha ? literals['rr'] : '')
 							+ (repaya ? literals['R'] : '')
 							+ (literals['modifiers'][modifier ? modifier : hal_able ? 'hal' : 'none']);
-				console.log(consonant, modifier, literals[consonant], literals['modifiers'][modifier], sinhala);
 				text = text.replace(translit, sinhala);
 			}
 			else {
