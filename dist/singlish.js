@@ -37,7 +37,7 @@ var Singlish = /*#__PURE__*/function () {
       var i = 0;
 
       while (true) {
-        // if (i >= 20) break;
+        if (i >= 50) break;
         var yansaya = 0,
             rakaransha = 0,
             repaya = 0,
@@ -80,23 +80,52 @@ var Singlish = /*#__PURE__*/function () {
           if (text.charCodeAt(i_1) == 32) {
             hal_able = 1;
           } else if (text.charAt(i_1).match(Singlish.CONSONANTS)) {
+            console.log(consonant, text.charAt(i_1), text.charAt(i_1) == 'r');
+
+            if (text.charAt(i_1) == 'r') {
+              rakaransha = 1;
+              translit += 'r';
+
+              if (text.substr(i_1).match(Singlish.VOWELS)) {
+                modifier = text.substr(i_1).match(Singlish.VOWELS)[0];
+                translit += modifier;
+                hal_able = 0;
+              }
+            }
             /*var char_i_2 = text.charAt(i_1 + 1);
             var char_i_3 = text.charAt(i_1 + 2);
             		if(char_i_2.match(VOWELS) || !char_i_3.match(/[^a-zA-Z\\]/)) {
             	hal_able = 1;
             }*/
-          } else if (text.substr(i_1).match(Singlish.VOWELS)) {
-            modifier = text.substr(i_1).match(Singlish.VOWELS)[0];
-            translit += modifier;
-            hal_able = 0;
-          } else {// console.log("NO MATCHES"); //TODO: Determine if this can be used as the end
+
+          } else {
+            if (text.charAt(i_1) == 'Y') {
+              yansaya = 1;
+              translit += 'Y';
+            }
+
+            if (text.substr(i_1).match(Singlish.VOWELS)) {
+              modifier = text.substr(i_1).match(Singlish.VOWELS)[0];
+              translit += modifier;
+              hal_able = 0;
+            }
           }
+          /*else {
+          	// console.log("NO MATCHES"); //TODO: Determine if this can be used as the end
+          }*/
+
 
           if (consonant.match(/\\[nh]/)) {
             hal_able = 0;
           }
 
-          var sinhala = literals[consonant] + (yansaya ? literals['Y'] : '') + (rakaransha ? literals['rr'] : '') + (repaya ? literals['R'] : '') + literals['modifiers'][modifier ? modifier : hal_able ? 'hal' : 'none'];
+          if (consonant.startsWith('R')) {
+            repaya = 1;
+            consonant = consonant.replace(/^./, '');
+          }
+
+          console.log("T:", translit);
+          var sinhala = (repaya ? literals['R'] : '') + literals[consonant] + (yansaya ? literals['Y'] : '') + (rakaransha ? literals['rr'] : '') + literals['modifiers'][modifier ? modifier : hal_able ? 'hal' : 'none'];
           text = text.replace(translit, sinhala);
         } else {
           var translit = initMatches[0];
