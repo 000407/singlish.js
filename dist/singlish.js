@@ -37,7 +37,7 @@ var Singlish = /*#__PURE__*/function () {
       var i = 0;
 
       while (true) {
-        if (i >= 50) break;
+        // if (i >= 50) break;
         var yansaya = 0,
             rakaransha = 0,
             repaya = 0,
@@ -80,8 +80,6 @@ var Singlish = /*#__PURE__*/function () {
           if (text.charCodeAt(i_1) == 32) {
             hal_able = 1;
           } else if (text.charAt(i_1).match(Singlish.CONSONANTS)) {
-            console.log(consonant, text.charAt(i_1), text.charAt(i_1) == 'r');
-
             if (text.charAt(i_1) == 'r') {
               rakaransha = 1;
               translit += 'r';
@@ -124,7 +122,6 @@ var Singlish = /*#__PURE__*/function () {
             consonant = consonant.replace(/^./, '');
           }
 
-          console.log("T:", translit);
           var sinhala = (repaya ? literals['R'] : '') + literals[consonant] + (yansaya ? literals['Y'] : '') + (rakaransha ? literals['rr'] : '') + literals['modifiers'][modifier ? modifier : hal_able ? 'hal' : 'none'];
           text = text.replace(translit, sinhala);
         } else {
