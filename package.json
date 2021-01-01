@@ -1,5 +1,5 @@
 {
-  "name": "singlish.js",
+  "name": "@_000407/singlish.js",
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
@@ -24,7 +24,10 @@
     "transliteration"
   ],
   "author": "Kanchana Senadheera <kanchana@senadheera.net> (kanchana.senadheera.net)",
-  "license": "ISC",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.7",
