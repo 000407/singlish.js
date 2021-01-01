@@ -2,7 +2,7 @@
   "name": "singlish.js",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/singlish.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "concurrently -k \"npm run dev\" \"npm run watch-css\"",
     "dev": "lite-server",
@@ -10,15 +10,20 @@
     "build": "webpack --config=webpack.config.js --mode=production",
     "build-min": "webpack --env minify=true --config=webpack.config.js --mode=production",
     "lint": "eslint ./src/**/*.js",
-    "build-css": "node-sass --include-path scss scss/main.scss assets/main.css",
-    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
     "test": "mocha test",
     "pretest": "npm run lint",
     "posttest": "echo the test has been run!",
     "bash": "Location of the bash/shell script file"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/000407/singlish.js.git"
+  },
+  "keywords": [
+    "singlish",
+    "transliteration"
+  ],
+  "author": "Kanchana Senadheera <kanchana@senadheera.net> (kanchana.senadheera.net)",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {

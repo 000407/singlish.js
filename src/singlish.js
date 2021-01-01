@@ -4,31 +4,31 @@ export default class Singlish {
 	}
 
 	static get CONSONANTS() {
-		return /((\\[nhNRJ])|(R?[bBcCdDfgGhjJkKlLmnNpPqsStTvwy])|(r))/;
+		return /^((\\[nhNRJ])|(R?[bBcCdDfgGhjJkKlLmnNpPqsStTvwy])|(r))/;
 	}
 
 	static get SP_CONSONANTS() {
-		return /\\[nhNRJ]/;
+		return /^\\[nhNRJ]/;
 	}
 
 	static get CEREBRALS() {
-		return /[bcCdDgkpsStT]h/;
+		return /^[bcCdDgkpsStT]h/;
 	}
 
 	static get SP_CEREBRALS() {
-		return /[GK]N/;
+		return /^[GK]N/;
 	}
 
 	static get NASALISED() {
-		return /(nnd(h)?|nng|mmb)/;
+		return /^(nnd(h)?|nng|mmb)/;
 	}
 
 	static get VOWELS() {
-		return /((a[au]?)|(ee?)|(ii?)|(oo?)|(uu?)|(Aa?)|I)/;
+		return /^((a[au]?)|(ee?)|(ii?)|(oo?)|(uu?)|(Aa?)|I)/;
 	}
 
 	static get SP_CHARS() {
-		return /Ruu?/;
+		return /^Ruu?/;
 	}
 
 	parse(text) {
@@ -36,7 +36,7 @@ export default class Singlish {
 
 		var i = 0;
 		while(true) {
-			// if (i >= 50) break;
+			if (i >= 50) break;
 
 			var yansaya = 0, rakaransha = 0, repaya = 0, hal_able = 1;
 			var initMatches = text.match(Singlish.MARKUP_PATTERN);
@@ -47,7 +47,7 @@ export default class Singlish {
 			}
 
 			if(initMatches[0].match(Singlish.CONSONANTS)) {
-				var m = m = initMatches[0].match(Singlish.CONSONANTS);
+				var m = initMatches[0].match(Singlish.CONSONANTS);
 				var consonant = null;
 
 				if(initMatches[0].match(Singlish.NASALISED)) {
@@ -83,13 +83,20 @@ export default class Singlish {
 				if(text.charCodeAt(i_1) == 32) {
 					hal_able = 1;
 				}
+				else if(text.substr(i_1).match(SP_CHARS)) {
+					modifier = text.substr(i_1).match(SP_CHARS)[0];
+					translit += modifier;
+					hal_able = 0;
+				}
 				else if(text.charAt(i_1).match(Singlish.CONSONANTS)) {
+					console.log("C:", consonant);
 					if(text.charAt(i_1) == 'r') {
+						console.log("R:", consonant);
 						rakaransha = 1;
 						translit += 'r';
 
-						if(text.substr(i_1).match(Singlish.VOWELS)) {
-							modifier = text.substr(i_1).match(Singlish.VOWELS)[0];
+						if(text.substr(i_1 + 1).match(Singlish.VOWELS)) {
+							modifier = text.substr(i_1 + 1).match(Singlish.VOWELS)[0];
 							translit += modifier;
 							hal_able = 0;
 						}
