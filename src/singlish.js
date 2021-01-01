@@ -83,8 +83,8 @@ export default class Singlish {
 				if(text.charCodeAt(i_1) == 32) {
 					hal_able = 1;
 				}
-				else if(text.substr(i_1).match(SP_CHARS)) {
-					modifier = text.substr(i_1).match(SP_CHARS)[0];
+				else if(text.substr(i_1).match(Singlish.SP_CHARS)) {
+					modifier = text.substr(i_1).match(Singlish.SP_CHARS)[0];
 					translit += modifier;
 					hal_able = 0;
 				}
