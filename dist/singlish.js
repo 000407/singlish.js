@@ -37,7 +37,7 @@ var Singlish = /*#__PURE__*/function () {
       var i = 0;
 
       while (true) {
-        // if (i >= 50) break;
+        if (i >= 50) break;
         var yansaya = 0,
             rakaransha = 0,
             repaya = 0,
@@ -50,7 +50,7 @@ var Singlish = /*#__PURE__*/function () {
         }
 
         if (initMatches[0].match(Singlish.CONSONANTS)) {
-          var m = m = initMatches[0].match(Singlish.CONSONANTS);
+          var m = initMatches[0].match(Singlish.CONSONANTS);
           var consonant = null;
 
           if (initMatches[0].match(Singlish.NASALISED)) {
@@ -79,13 +79,20 @@ var Singlish = /*#__PURE__*/function () {
 
           if (text.charCodeAt(i_1) == 32) {
             hal_able = 1;
+          } else if (text.substr(i_1).match(SP_CHARS)) {
+            modifier = text.substr(i_1).match(SP_CHARS)[0];
+            translit += modifier;
+            hal_able = 0;
           } else if (text.charAt(i_1).match(Singlish.CONSONANTS)) {
+            console.log("C:", consonant);
+
             if (text.charAt(i_1) == 'r') {
+              console.log("R:", consonant);
               rakaransha = 1;
               translit += 'r';
 
-              if (text.substr(i_1).match(Singlish.VOWELS)) {
-                modifier = text.substr(i_1).match(Singlish.VOWELS)[0];
+              if (text.substr(i_1 + 1).match(Singlish.VOWELS)) {
+                modifier = text.substr(i_1 + 1).match(Singlish.VOWELS)[0];
                 translit += modifier;
                 hal_able = 0;
               }
@@ -140,37 +147,37 @@ var Singlish = /*#__PURE__*/function () {
   }, {
     key: "CONSONANTS",
     get: function get() {
-      return /((\\[nhNRJ])|(R?[bBcCdDfgGhjJkKlLmnNpPqsStTvwy])|(r))/;
+      return /^((\\[nhNRJ])|(R?[bBcCdDfgGhjJkKlLmnNpPqsStTvwy])|(r))/;
     }
   }, {
     key: "SP_CONSONANTS",
     get: function get() {
-      return /\\[nhNRJ]/;
+      return /^\\[nhNRJ]/;
     }
   }, {
     key: "CEREBRALS",
     get: function get() {
-      return /[bcCdDgkpsStT]h/;
+      return /^[bcCdDgkpsStT]h/;
     }
   }, {
     key: "SP_CEREBRALS",
     get: function get() {
-      return /[GK]N/;
+      return /^[GK]N/;
     }
   }, {
     key: "NASALISED",
     get: function get() {
-      return /(nnd(h)?|nng|mmb)/;
+      return /^(nnd(h)?|nng|mmb)/;
     }
   }, {
     key: "VOWELS",
     get: function get() {
-      return /((a[au]?)|(ee?)|(ii?)|(oo?)|(uu?)|(Aa?)|I)/;
+      return /^((a[au]?)|(ee?)|(ii?)|(oo?)|(uu?)|(Aa?)|I)/;
     }
   }, {
     key: "SP_CHARS",
     get: function get() {
-      return /Ruu?/;
+      return /^Ruu?/;
     }
   }, {
     key: "LITERALS",
