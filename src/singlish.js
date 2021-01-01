@@ -46,8 +46,8 @@ export default class Singlish {
 				return text;
 			}
 
-			if(initMatches[0].match(VOWELS)) {
-				var translit = initMatches[0].match(VOWELS)[0];
+			if(initMatches[0].match(Singlish.VOWELS)) {
+				var translit = initMatches[0].match(Singlish.VOWELS)[0];
 
 				text = text.replace(translit, literals[translit]);
 			}
