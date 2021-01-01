@@ -89,9 +89,7 @@ export default class Singlish {
 					hal_able = 0;
 				}
 				else if(text.charAt(i_1).match(Singlish.CONSONANTS)) {
-					console.log("C:", consonant);
 					if(text.charAt(i_1) == 'r') {
-						console.log("R:", consonant);
 						rakaransha = 1;
 						translit += 'r';
 
@@ -101,12 +99,6 @@ export default class Singlish {
 							hal_able = 0;
 						}
 					}
-					/*var char_i_2 = text.charAt(i_1 + 1);
-					var char_i_3 = text.charAt(i_1 + 2);
-
-					if(char_i_2.match(VOWELS) || !char_i_3.match(/[^a-zA-Z\\]/)) {
-						hal_able = 1;
-					}*/
 				}
 				else {
 					if(text.charAt(i_1) == 'Y') {
@@ -119,9 +111,6 @@ export default class Singlish {
 						hal_able = 0;
 					}
 				}
-				/*else {
-					// console.log("NO MATCHES"); //TODO: Determine if this can be used as the end
-				}*/
 
 				if(consonant.match(/\\[nh]/)) {
 					hal_able = 0;
